@@ -35,8 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
     String pathObjectDetectionModel = "assets/models/yolov5s.torchscript";
     try {
       _objectModel = await FlutterPytorch.loadObjectDetectionModel(
-        // change the 80 with number of classes in your model pretrained yolov5 had almost 80 classes so I added 80 here.
-          pathObjectDetectionModel, 80, 640, 640,
+          // change the 80 with number of classes in your model pretrained yolov5 had almost 80 classes so I added 80 here.
+          pathObjectDetectionModel,
+          80,
+          640,
+          640,
           labelPath: "assets/labels/labels.txt");
     } catch (e) {
       if (e is PlatformException) {
@@ -102,7 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
           //Image with Detections....
 
           !firststate
-              ? !message ? LoaderState() : Text("Select the Camera to Begin Detections")
+              ? !message
+                  ? LoaderState()
+                  : Text("Select the Camera to Begin Detections")
               : Expanded(
                   child: Container(
                       child:
